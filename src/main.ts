@@ -14,6 +14,8 @@ import setupComponents from '@/components'
 // 引入全局样式
 import '@/styles/index.scss'
 
+// 引入pinia
+import pinia from '@/store'
 // 引入路由
 import router from '@/router'
 
@@ -22,6 +24,8 @@ const app = createApp(App)
 app.use(ElementPlus, {
   locale: zhCn
 })
+console.log(pinia)
+app.use(pinia)
 app.use(router)
 
 setupComponents(app)
