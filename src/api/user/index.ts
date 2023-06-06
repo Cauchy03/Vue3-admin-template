@@ -17,6 +17,6 @@ export const reqLogin = (data: loginFormData) =>
   request.post<any, loginResponseData>('/user/login', data)
 //获取用户信息
 export const reqUserInfo = () =>
-  request.get<any, userInfoReponseData>(API.USERINFO_URL)
+  request.get<any, userInfoReponseData>('user/info')
 //退出登录
 export const reqLogout = () => request.post<any, any>(API.LOGOUT_URL)

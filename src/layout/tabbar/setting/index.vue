@@ -12,17 +12,21 @@
     @click="fullScreen"
   ></el-button>
   <el-button size="small" icon="setting" circle></el-button>
+  <img
+    :src="userStore.avatar"
+    style="width: 24px; height: 24px; margin: 0px 10px; border-radius: 50%"
+  />
   <!-- 下拉菜单 -->
   <el-dropdown style="margin-left: 10px">
     <span class="el-dropdown-link">
-      Cauchy
+      {{ userStore.username }}
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -30,8 +34,14 @@
 
 <script setup lang="ts">
 import { nextTick } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import useLayoutSettingStore from '@/store/modules/setting'
+import useUserStore from '@/store/modules/user'
+import { ElMessage } from 'element-plus'
+let userStore = useUserStore()
 let layoutStore = useLayoutSettingStore()
+let router = useRouter()
+let route = useRoute()
 // 刷新
 const updateRefresh = () => {
   layoutStore.refresh = true
@@ -50,6 +60,16 @@ const fullScreen = () => {
     // 退出全屏
     document.exitFullscreen()
   }
+}
+// 退出
+const logout = () => {
+  userStore.userLogout().then(() => {
+    router.push({ path: '/login', query: { redirect: route.path } })
+    ElMessage({
+      message: '退出成功',
+      type: 'success'
+    })
+  })
 }
 </script>
 

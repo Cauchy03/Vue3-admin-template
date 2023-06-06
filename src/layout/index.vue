@@ -35,17 +35,24 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
 import Tabber from './tabbar/index.vue'
 import Main from './main/index.vue'
 import useUerStore from '@/store/modules/user'
-import { useRoute } from 'vue-router'
+
 import useLayoutSettingStore from '@/store/modules/setting'
 
 let userStore = useUerStore()
 let route = useRoute()
 let layoutStore = useLayoutSettingStore()
+
+// 挂载获取用户信息
+onMounted(() => {
+  userStore.userInfo()
+})
 </script>
 
 <style scoped lang="scss">
@@ -59,9 +66,11 @@ let layoutStore = useLayoutSettingStore()
     height: 100vh;
     background: $base-menu-background;
     transition: all 0.3s;
+
     .logo {
       background: $base-menu-logo-background;
     }
+
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
