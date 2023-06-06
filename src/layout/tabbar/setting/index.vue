@@ -1,5 +1,10 @@
 <template>
-  <el-button size="small" icon="Refresh" circle></el-button>
+  <el-button
+    size="small"
+    icon="Refresh"
+    circle
+    @click="updateRefresh"
+  ></el-button>
   <el-button size="small" icon="FullScreen" circle></el-button>
   <el-button size="small" icon="setting" circle></el-button>
   <!-- 下拉菜单 -->
@@ -18,6 +23,17 @@
   </el-dropdown>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { nextTick } from 'vue'
+import useLayoutSettingStore from '@/store/modules/setting'
+let layoutStore = useLayoutSettingStore()
+
+const updateRefresh = () => {
+  layoutStore.refresh = true
+  nextTick(() => {
+    layoutStore.refresh = false
+  })
+}
+</script>
 
 <style scoped></style>
