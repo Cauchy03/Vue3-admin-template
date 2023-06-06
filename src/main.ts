@@ -24,7 +24,6 @@ const app = createApp(App)
 app.use(ElementPlus, {
   locale: zhCn
 })
-console.log(pinia)
 app.use(pinia)
 app.use(router)
 

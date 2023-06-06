@@ -5,10 +5,13 @@ import { reqLogin } from '@/api/user/index'
 import type { UserState } from './types/type'
 //引入操作本地存储的工具方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
+//引入路由(常量路由)
+import { constantRoute } from '@/router/routes'
 
 const useUserStore = defineStore('User', {
   state: (): UserState => ({
-    token: GET_TOKEN() //用户唯一标识token
+    token: GET_TOKEN(), //用户唯一标识token
+    menuRoutes: constantRoute
   }),
   actions: {
     //用户登录的方法
