@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-//对外暴露配置路由(常量路由):全部用户都可以访问到的路由
+// 常量路由
 export const constantRoute: RouteRecordRaw[] = [
   {
     //登录
@@ -43,16 +43,11 @@ export const constantRoute: RouteRecordRaw[] = [
       hidden: true,
       icon: 'DocumentDelete'
     }
-  },
-  {
-    // 路径不匹配 重定向404
-    path: '/:pathMatch(.*)*',
-    redirect: '/404',
-    name: 'Any',
-    meta: {
-      hidden: true
-    }
-  },
+  }
+]
+
+// 异步路由
+export const asnycRoute: RouteRecordRaw[] = [
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),
@@ -139,5 +134,18 @@ export const constantRoute: RouteRecordRaw[] = [
         }
       }
     ]
+  }
+]
+
+// 任意路由
+export const anyRoute: RouteRecordRaw[] = [
+  {
+    // 路径不匹配 重定向404
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
+    name: 'Any',
+    meta: {
+      hidden: true
+    }
   }
 ]
